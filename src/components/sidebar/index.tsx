@@ -64,7 +64,7 @@ export default function Sidebar() {
         },
     ]
     return (
-        <div className="w-[300px] gap-2 flex flex-col border-r min-h-screen p-4 min-w-[300px]">
+        <div className="w-[300px] fixed gap-2 flex flex-col border-r min-h-screen p-4 min-w-[300px]">
             <div>
                 <UserItem/>
             </div>
@@ -86,7 +86,7 @@ export default function Sidebar() {
             </CommandList>
             </Command>
             </div>
-            <div>Settings part</div>
+            <div className="text-sm text-gray-600">Settings/Notifications</div>
         </div>
     );
 }
