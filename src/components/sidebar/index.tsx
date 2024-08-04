@@ -13,6 +13,8 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command"
+import { Suspense } from "react";
+import LoadingMenu from "./loading";
 
 export default function Sidebar() {
     const menuList = [
@@ -69,22 +71,22 @@ export default function Sidebar() {
                 <UserItem/>
             </div>
             <div className="grow">
-            <Command className="overflow-visible">
-            <CommandInput placeholder="Type a command or search..." />
-            <CommandList className="overflow-visible">
-                <CommandEmpty>No results found.</CommandEmpty>
-                {menuList.map((menu, key) => {
-                    return (menu.items ? <>
-                        <CommandGroup key={key} heading={menu.group}>
-                            {
-                                menu.items.map((item, key) => <CommandItem key={key} className="flex gap-2 cursor-pointer">{item.icon}{item.text}</CommandItem>)
-                            }
-                        </CommandGroup>
-                        <CommandSeparator />
-                    </> : null)
-                })}
-            </CommandList>
-            </Command>
+            <Suspense fallback={<LoadingMenu/>}>
+                <Command className="overflow-visible">
+                <CommandList className="overflow-visible">
+                    {menuList.map((menu, key) => {
+                        return (menu.items ? <>
+                            <CommandGroup key={key} heading={menu.group}>
+                                {
+                                    menu.items.map((item, key) => <CommandItem key={key} className="flex gap-2 cursor-pointer">{item.icon}{item.text}</CommandItem>)
+                                }
+                            </CommandGroup>
+                            <CommandSeparator />
+                        </> : null)
+                    })}
+                </CommandList>
+                </Command>
+            </Suspense>
             </div>
             <div className="text-sm text-gray-600">Settings/Notifications</div>
         </div>
