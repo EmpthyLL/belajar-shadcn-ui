@@ -68,7 +68,7 @@ export default function Sidebar() {
         },
     ]
     return (
-        <div className="w-[300px] fixed gap-2 flex flex-col min-w-[300px] min-h-screen p-4 border-r ">
+        <div className={`gap-2 flex flex-col min-h-screen p-4 border-r`}>
             <div>
                 <UserItemCustom/>
                 {/* <UserItem

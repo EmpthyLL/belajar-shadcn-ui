@@ -16,7 +16,7 @@ import { read } from "fs";
 import { Item } from "@radix-ui/react-dropdown-menu";
 import { Skeleton } from "../ui/skeleton";
 
-export default function Header() {
+export default function Header({menuHandler}:any) {
     const [notifications, setNotifications] = useState([
         {
             tittle: 'Notif 1',
@@ -52,7 +52,7 @@ export default function Header() {
     return (
         <div className="gap-4 grid grid-cols-2 items-center border-b p-4">
             <div className="flex gap-2 items-center">
-            <Button variant={'outline'}><Menu /></Button>
+            <Button variant={'outline'} onClick={menuHandler}><Menu /></Button>
             <CommandBar/>
             </div>
             <div className="flex justify-end">

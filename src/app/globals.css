@@ -94,3 +94,38 @@
 .tag.pend{
   @apply bg-rose-100 text-rose-400 hover:bg-rose-200
 }
+.sidebar-transition {
+  transition: transform 0.3s ease-in-out;
+}
+.sidebar-open {
+  width: 300px;
+  transform: translateX(0);
+}
+.sidebar-closed {
+  width: 0;
+  transform: translateX(-100%);
+}
+
+.header-transition {
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.header-open {
+  margin-left: 300px;
+}
+
+.header-closed {
+  margin-left: 0;
+}
+
+.main-transition {
+  transition: margin-left 0.3s 0.3s;
+}
+
+.main-open {
+  margin-left: 300px;
+}
+
+.main-closed {
+  margin-left: 0;
+}

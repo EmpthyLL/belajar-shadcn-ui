@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/sidebar";
-import Header from "@/components/header";
+import Navigations from "@/components/navigations";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,15 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} flex items-start justify-between`}>
-        <div className="hidden lg:flex min-w-[300px]">
-        <Sidebar/>
-        </div>
-        <main className="mb-5 w-full h-full">
-          <Header/>
-          <div className="p-5">
-            {children}
-          </div>
-        </main>
+        <Navigations>
+          {children}
+        </Navigations>
       </body>
     </html>
   );
