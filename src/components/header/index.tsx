@@ -1,6 +1,6 @@
 'use client'
 
-import { BellDot, BellIcon } from "lucide-react";
+import { BellDot, BellIcon, Menu } from "lucide-react";
 import { CommandBar } from "../command";
 import { Button, buttonVariants } from "../ui/button";
 import {
@@ -51,7 +51,10 @@ export default function Header() {
     }
     return (
         <div className="gap-4 grid grid-cols-2 items-center border-b p-4">
+            <div className="flex gap-2 items-center">
+            <Button variant={'outline'}><Menu /></Button>
             <CommandBar/>
+            </div>
             <div className="flex justify-end">
                 <DropdownMenu>
                 <DropdownMenuTrigger asChild>

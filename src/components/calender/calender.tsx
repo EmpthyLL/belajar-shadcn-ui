@@ -19,7 +19,7 @@ export default function Calendar() {
         <CardTitle>Calendar</CardTitle>
         <CardDescription>These are the targets of sales done this year.</CardDescription>
       </CardHeader>
-      <CardContent className="h-[160px] flex items-center w-full">
+      <CardContent className="h-[120px] flex items-center w-full">
         <MyResponsiveCalendar data={dataCalender} year="2023"/>
       </CardContent>
     </Card>

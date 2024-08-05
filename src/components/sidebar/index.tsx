@@ -1,7 +1,7 @@
 'use client'
 
-import { Bell, CreditCard, Inbox, Link, MessageSquare, Settings, ShieldCheck, User } from "lucide-react";
-import UserItem from "../user-item";
+import { Bell, CreditCard, Inbox, MessageSquare, Settings, ShieldCheck, User } from "lucide-react";
+import UserItemCustom from "../user-item";
 import {
   Command,
   CommandDialog,
@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/command"
 import { Suspense } from "react";
 import LoadingMenu from "./loading";
+import UserItem from "useritem"
+import Link from "next/link";
 
 export default function Sidebar() {
     const menuList = [
@@ -66,9 +68,16 @@ export default function Sidebar() {
         },
     ]
     return (
-        <div className="w-[300px] fixed gap-2 flex flex-col border-r min-h-screen p-4 min-w-[300px]">
+        <div className="w-[300px] fixed gap-2 flex flex-col min-w-[300px] min-h-screen p-4 border-r ">
             <div>
-                <UserItem/>
+                <UserItemCustom/>
+                {/* <UserItem
+                    name='Sarah Pangestia'
+                    description='sarapang12@gmail.com'
+                    shadow={false}
+                    avatarUrl='SP.png'
+                    online={true}
+                /> */}
             </div>
             <div className="grow">
             <Suspense fallback={<LoadingMenu/>}>
@@ -88,7 +97,12 @@ export default function Sidebar() {
                 </Command>
             </Suspense>
             </div>
-            <div className="text-sm text-gray-600">Settings/Notifications</div>
+            <div className="text-sm text-gray-600">
+                <Link href='/team' className="flex items-center gap-2">
+                <Settings />
+                <span>Team Settings</span>
+                </Link>
+            </div>
         </div>
     );
 }

@@ -67,3 +67,30 @@
     @apply bg-background text-foreground;
   }
 }
+.bg-card{
+  overflow: hidden;
+}
+.tag.adm{
+  @apply bg-yellow-100 text-yellow-400 hover:bg-yellow-200
+}
+.tag.digart{
+  @apply bg-emerald-100 text-emerald-400 hover:bg-emerald-200
+}
+.tag.prog{
+  @apply bg-cyan-100 text-cyan-400 hover:bg-cyan-200
+}
+.tag.gmdev{
+  @apply bg-red-100 text-red-400 hover:bg-red-200
+}
+.tag.ui-ux{
+  @apply bg-purple-100 text-purple-400 hover:bg-purple-200
+}
+.tag.dtsct{
+  @apply bg-orange-100 text-orange-400 hover:bg-orange-200
+}
+.tag.oth{
+  @apply bg-slate-100 text-slate-400 hover:bg-slate-200
+}
+.tag.pend{
+  @apply bg-rose-100 text-rose-400 hover:bg-rose-200
+}

@@ -48,7 +48,7 @@ export const MyResponsiveBump: React.FC<{ data: BumpData[] }> = ({ data }) => (
             legendOffset: -40,
             truncateTickAt: 0
         }}
-        margin={{ top: 40, right: 100, bottom: 40, left: 60 }}
+        margin={{ top: 40, right: 60, bottom: 40, left: 20 }}
         axisRight={null}
     />
 );

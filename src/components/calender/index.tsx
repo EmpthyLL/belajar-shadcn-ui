@@ -15,7 +15,7 @@ export const MyResponsiveCalendar: React.FC<MyResponsiveCalendarProps> = ({ data
     <ResponsiveTimeRange
         data={data.map(item => ({ day: item.day, value: item.value }))}
         from={`${year}-01-01`}
-        to={`${year}-04-30`}
+        to={`${year}-07-31`}
         emptyColor="#eeeeee"
         colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
         dayBorderWidth={2}

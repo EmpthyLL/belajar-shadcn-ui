@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 
-export default function UserItem() {
+export default function UserItemCustom() {
     return (
         <div className="flex items-center justify-between py-2 px-4 gap-2 border rounded-[8px] bg-secondary">
             {/* <div className="avatar rounded-full min-h-14 min-w-14 bg-emerald-500 text-white font-[700] flex items-center justify-center">
