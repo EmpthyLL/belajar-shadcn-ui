@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@nivo/line'
 import React from 'react';
 
-export const MyResponsiveLine: React.FC<{ data: BumpData[] }> = ({ data }) => (
+export const MyResponsiveLine = ({ data }:any) => (
     <ResponsiveLine
         data={data}
         xScale={{ type: 'point' }}
