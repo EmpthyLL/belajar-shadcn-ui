@@ -129,3 +129,29 @@
 .main-closed {
   margin-left: 0;
 }
+
+*::-webkit-scrollbar{
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background-color: #EfEfEf;
+}
+*::-webkit-scrollbar-thumb{
+  background-color: #BBB;
+  border-radius: 6px;
+  pointer-events: all;
+}
+/* *::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  pointer-events: all;
+  background: #d9d9d9;
+  border-radius: 10px;
+} */
