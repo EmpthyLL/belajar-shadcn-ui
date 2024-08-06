@@ -1,12 +1,11 @@
-import { ResponsiveBump } from '@nivo/bump';
+import { ResponsiveBump, BumpResponsiveProps, BumpDatum } from '@nivo/bump';
 import React from 'react';
 
-interface BumpData {
-    id: string;
-    data: { x: string; y: number }[]; // Define the structure of each data point
+interface MyResponsiveBumpProps {
+    data: any;
 }
 
-export const MyResponsiveBump: React.FC<{ data: BumpData[] }> = ({ data }) => (
+export const MyResponsiveBump: React.FC<MyResponsiveBumpProps> = ({ data, ...otherProps }:any) => (
     <ResponsiveBump
         data={data}
         colors={{ scheme: 'spectral' }}
@@ -50,5 +49,10 @@ export const MyResponsiveBump: React.FC<{ data: BumpData[] }> = ({ data }) => (
         }}
         margin={{ top: 40, right: 60, bottom: 40, left: 20 }}
         axisRight={null}
+        useMesh={true} // Include any other required props
+        interpolation="monotoneX" // Example additional prop
+        xPadding={20} // Example additional prop
+        xOuterPadding={20} // Example additional prop
+        {...otherProps} // Spread other props
     />
 );
