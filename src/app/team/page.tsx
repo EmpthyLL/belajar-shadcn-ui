@@ -17,6 +17,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import axios from "axios";
+import SearchInput from "@/components/search";
 
 type members = {
     email:string,
@@ -54,7 +55,7 @@ function getBGcolor(role:string){
 }
 async function getData(){
     const data = await axios.get('http://localhost:3005/team')
-    console.log(data)
+    console.log(data.data)
 }
 
 export default function Team() {
@@ -136,9 +137,10 @@ export default function Team() {
             </header>
             <div className="grid gap-4">
                 <div className="flex items-center justify-between gap-4">
-                    <Command className="rounded-lg border">
+                    {/* <Command className="rounded-lg border">
                     <CommandInput placeholder="Type an email to invite..." />
-                    </Command>
+                    </Command> */}
+                    <SearchInput type="text" placeholder='Search a team member...'/>
                     <Button variant={'outline'} className="flex justify-center items-end"><Plus /> Add Members</Button>
                 </div>
             </div>
@@ -153,7 +155,8 @@ export default function Team() {
                       </Alert>
                 ): null}
                 {members &&
-                    members.map((member, key) => (<div className="grid grid-cols-6 pr-4 items-center justify-between border-b last:border-0" key={key}>
+                    members.map((member, key) => (
+                    <div className="grid grid-cols-6 pr-4 items-center justify-between border-b last:border-0" key={key}>
                         <div className="col-span-2">
                             <UserItem
                                 name={member.username}
