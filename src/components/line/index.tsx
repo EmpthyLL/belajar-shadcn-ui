@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@nivo/line'
 import React from 'react';
 
-export const MyResponsiveLine = ({ data }:any) => (
+export const MyResponsiveLine = ({ data,  chartMode, scheme}:any) => (
     <ResponsiveLine
         data={data}
         xScale={{ type: 'point' }}
@@ -13,7 +13,7 @@ export const MyResponsiveLine = ({ data }:any) => (
             reverse: false
         }}
         yFormat=" >-.2f"
-        curve="basis"
+        curve={chartMode}
         axisTop={null}
         axisRight={null}
         axisBottom={{
@@ -35,7 +35,7 @@ export const MyResponsiveLine = ({ data }:any) => (
             truncateTickAt: 0
         }}
         enableGridX={false}
-        colors={{scheme:'nivo'}}
+        colors={{scheme}}
         lineWidth={6}
         // enablePoints={false}
         pointSize={9}

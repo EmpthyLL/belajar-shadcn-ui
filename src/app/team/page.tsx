@@ -1,7 +1,7 @@
 'use client'
 import { Button } from "@/components/ui/button";
 import { OctagonAlert, Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserItem from 'useritem'
 import {
     Command,
@@ -16,6 +16,7 @@ import {
   } from "@/components/ui/command"
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import axios from "axios";
 
 type members = {
     email:string,
@@ -51,6 +52,11 @@ function getBGcolor(role:string){
         return bgList[6]
     }
 }
+async function getData(){
+    const data = await axios.get('http://localhost:3005/team')
+    console.log(data)
+}
+
 export default function Team() {
     const [members, setMembers] = useState<members[]>([
         {
@@ -120,6 +126,9 @@ export default function Team() {
             online:true
         },
     ])
+    useEffect(() => {
+        getData()
+    },[])
     return (
         <div className="grid gap-4">
             <header>

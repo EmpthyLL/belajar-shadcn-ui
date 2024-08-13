@@ -80,22 +80,20 @@ export default function Sidebar() {
                 /> */}
             </div>
             <div className="grow">
-            <Suspense fallback={<LoadingMenu/>}>
-                <Command className="overflow-visible">
-                <CommandList className="overflow-visible">
-                    {menuList.map((menu, key) => {
-                        return (menu.items ? <>
-                            <CommandGroup key={key} heading={menu.group}>
-                                {
-                                    menu.items.map((item, key) => <CommandItem key={key} className="flex gap-2 cursor-pointer">{item.icon}{item.text}</CommandItem>)
-                                }
-                            </CommandGroup>
-                            <CommandSeparator />
-                        </> : null)
-                    })}
-                </CommandList>
-                </Command>
-            </Suspense>
+            <Command className="overflow-visible">
+            <CommandList className="overflow-visible">
+                {menuList.map((menu, key) => {
+                    return (menu.items ? <div key={key} >
+                        <CommandGroup heading={menu.group}>
+                            {
+                                menu.items.map((item, key) => <CommandItem key={key} className="flex gap-2 cursor-pointer">{item.icon}{item.text}</CommandItem>)
+                            }
+                        </CommandGroup>
+                        <CommandSeparator />
+                    </div> : null)
+                })}
+            </CommandList>
+            </Command>
             </div>
             <div className="text-sm text-gray-600">
                 <Link href='/team' className="flex items-center gap-2">

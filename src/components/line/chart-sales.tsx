@@ -9,15 +9,15 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { MyResponsiveLine } from ".";
-import { dataChart } from "@/lib/data";
+import { dataChartSales } from "@/lib/data";
 
-export default function Chart() {
+export default function ChartSales() {
     return (
         <Card>
-            <CardHeader>Profit</CardHeader>
-            <CardDescription className="px-4">These are the profit of sales done this year.</CardDescription>
+            <CardHeader>Sales</CardHeader>
+            <CardDescription className="px-4">These are the sales done this month.</CardDescription>
             <CardContent className="h-[250px] flex items-center w-full">
-                <MyResponsiveLine data={dataChart}/>
+                <MyResponsiveLine data={dataChartSales} chartMode={'basis'} scheme={'nivo'}/>
             </CardContent>
         </Card>
     );
