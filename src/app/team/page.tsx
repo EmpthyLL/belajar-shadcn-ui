@@ -153,7 +153,7 @@ export default function Team() {
               className="grid grid-cols-6 pr-4 items-center justify-between border-b last:border-0"
               key={key}
             >
-              <div className="col-span-2">
+              <div className="lg:col-span-2 col-span-5">
                 <UserItem
                   name={member.username}
                   description={member.email}
@@ -163,7 +163,7 @@ export default function Team() {
                   online={member.online}
                 />
               </div>
-              <div className="col-span-3 flex gap-5">
+              <div className="col-span-3 lg:flex hidden gap-5">
                 <Badge className={`tag ${member.roleid}`}>{member.role}</Badge>
                 {member.status && (
                   <Badge className={`tag ${member.statusid}`}>
@@ -171,7 +171,7 @@ export default function Team() {
                   </Badge>
                 )}
               </div>
-              <div className="col-span-1 flex justify-end">
+              <div className="col-span-1 md:flex hidden justify-end">
                 <Button variant={"ghost"}>
                   <Trash2 />
                 </Button>
