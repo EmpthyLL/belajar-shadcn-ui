@@ -22,6 +22,32 @@ type members = {
 };
 
 export default function Team() {
+  const bgList = [
+    "#eab308",
+    "#10b981",
+    "#06b6d4",
+    "#ef4444",
+    "#a855f7",
+    "#f97316",
+    "#f1f5f9",
+  ];
+  function getBGcolor(role: string) {
+    if (role === "Admin") {
+      return bgList[0];
+    } else if (role === "Digital Artist") {
+      return bgList[1];
+    } else if (role === "Programmer") {
+      return bgList[2];
+    } else if (role === "Game Developer") {
+      return bgList[3];
+    } else if (role === "UI/UX Designer") {
+      return bgList[4];
+    } else if (role === "Data Scientist") {
+      return bgList[5];
+    } else {
+      return bgList[6];
+    }
+  }
   const [members, setMembers] = useState<members[]>([
     {
       email: "sarapang12@gmail.com",
