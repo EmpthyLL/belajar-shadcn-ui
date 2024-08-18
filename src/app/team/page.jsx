@@ -10,16 +10,6 @@ import axios from "axios";
 import SearchInput from "@/components/search";
 import DialogForm from "@/components/dialog";
 
-// type members = {
-//   email: string;
-//   username: string;
-//   backgroundColor: string;
-//   role: string;
-//   roleid: string;
-//   online: boolean;
-//   status?: string;
-//   statusid?: string;
-// };
 async function getData() {
   try {
     const res = await axios.get("http://127.0.0.1:3005/team");
@@ -52,7 +42,7 @@ export default function Team() {
   //   "#f97316",
   //   "#f1f5f9",
   // ];
-  // function getBGcolor(role: string) {
+  // function getBGcolor(role) {
   //   if (role === "Admin") {
   //     return bgList[0];
   //   } else if (role === "Digital Artist") {
@@ -69,13 +59,13 @@ export default function Team() {
   //     return bgList[6];
   //   }
   // }
-  // const [members, setMembers] = useState<members[]>([
+  // const members = [
   //   {
   //     email: "sarapang12@gmail.com",
   //     username: "Sarakuapa",
   //     role: "Admin",
   //     roleid: "adm",
-  //     backgroundColor: getBGcolor("Admin"),
+  //     bgcolor: getBGcolor("Admin"),
   //     online: true,
   //   },
   //   {
@@ -83,7 +73,7 @@ export default function Team() {
   //     username: "Johanana",
   //     role: "Digital Artist",
   //     roleid: "digart",
-  //     backgroundColor: getBGcolor("Digital Artist"),
+  //     bgcolor: getBGcolor("Digital Artist"),
   //     online: false,
   //   },
   //   {
@@ -91,7 +81,7 @@ export default function Team() {
   //     username: "Tommatoo",
   //     role: "Programmer",
   //     roleid: "prog",
-  //     backgroundColor: getBGcolor("Programmer"),
+  //     bgcolor: getBGcolor("Programmer"),
   //     online: true,
   //   },
   //   {
@@ -99,7 +89,7 @@ export default function Team() {
   //     username: "Devamana",
   //     role: "Game Developer",
   //     roleid: "gmdev",
-  //     backgroundColor: getBGcolor("Game Developer"),
+  //     bgcolor: getBGcolor("Game Developer"),
   //     online: false,
   //   },
   //   {
@@ -107,7 +97,7 @@ export default function Team() {
   //     username: "Ivana",
   //     role: "UI/UX Designer",
   //     roleid: "ui-ux",
-  //     backgroundColor: getBGcolor("UI/UX Designer"),
+  //     bgcolor: getBGcolor("UI/UX Designer"),
   //     online: false,
   //   },
   //   {
@@ -115,7 +105,7 @@ export default function Team() {
   //     username: "Lololala",
   //     role: "Data Scientist",
   //     roleid: "dtsct",
-  //     backgroundColor: getBGcolor("Data Scientist"),
+  //     bgcolor: getBGcolor("Data Scientist"),
   //     online: true,
   //   },
   //   {
@@ -123,7 +113,7 @@ export default function Team() {
   //     username: "Farhan Semesta",
   //     role: "Others",
   //     roleid: "oth",
-  //     backgroundColor: getBGcolor("Others"),
+  //     bgcolor: getBGcolor("Others"),
   //     online: false,
   //     status: "Pending",
   //     statusid: "pend",
@@ -133,10 +123,10 @@ export default function Team() {
   //     username: "Masararu",
   //     role: "Others",
   //     roleid: "oth",
-  //     backgroundColor: getBGcolor("Others"),
+  //     bgcolor: getBGcolor("Others"),
   //     online: true,
   //   },
-  // ]);
+  // ];
   useEffect(() => {
     async function loadMembers() {
       try {
