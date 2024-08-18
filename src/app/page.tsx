@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Calendar from "@/components/calender/calender";
 import { DataTableDemo } from "@/components/data-table";
@@ -7,7 +7,13 @@ import ChartSales from "@/components/line/chart-sales";
 import ChartProfit from "@/components/line/chart-profit";
 import ChartShadcn from "@/components/line/chart-shad";
 import { TableDemo } from "@/components/table";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Dashboard() {
   return (
@@ -20,27 +26,31 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="grid mt-5 xl:grid-cols-2 gap-5">
-        <ChartSales/>
-        <ChartProfit/>
+        <ChartSales />
+        <ChartProfit />
         {/* <ChartShadcn/> */}
       </div>
       <div className="mt-5 gap-5 grid xl:grid-cols-2">
-      <Card className="overflow-y-scroll">
+        <Card className="overflow-y-scroll">
           <CardHeader>
             <CardTitle>Orders</CardTitle>
-            <CardDescription>These are the order of sales done this week.</CardDescription>
+            <CardDescription>
+              These are the order of sales done this week.
+            </CardDescription>
           </CardHeader>
           <CardContent>
-          <TableDemo/>
+            <TableDemo />
           </CardContent>
         </Card>
-      <Card className="overflow-y-scroll">
+        <Card className="overflow-y-scroll">
           <CardHeader>
             <CardTitle>Orders</CardTitle>
-            <CardDescription>These are the order of sales done this week.</CardDescription>
+            <CardDescription>
+              These are the order of sales done this week.
+            </CardDescription>
           </CardHeader>
           <CardContent>
-          <DataTableDemo/>
+            <DataTableDemo />
           </CardContent>
         </Card>
       </div>

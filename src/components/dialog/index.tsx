@@ -7,13 +7,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
-import RoleSelection from "../select";
 import AddMemberForm from "../form";
-export default function DialogForm() {
+export default function DialogForm({ postData }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -28,7 +25,7 @@ export default function DialogForm() {
             Click Add Member after filling the form
           </DialogDescription>
         </DialogHeader>
-        <AddMemberForm />
+        <AddMemberForm postData={postData} />
       </DialogContent>
     </Dialog>
   );

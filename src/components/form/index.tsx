@@ -15,8 +15,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import RoleSelection from "../select";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -30,16 +28,17 @@ const formSchema = z.object({
     .min(5, {
       message: "Email must be at least 5 characters.",
     }),
-  month: z.string(),
-  role: z.enum([
-    "Admin",
-    "Digital Artist",
-    "Programmer",
-    "Game Developer",
-    "UI/UX Designer",
-    "Data Scientist",
-    "Others",
-  ]),
+  role: z
+    .enum([
+      "Admin",
+      "Digital Artist",
+      "Programmer",
+      "Game Developer",
+      "UI/UX Designer",
+      "Data Scientist",
+      "Others",
+    ])
+    .default("Others"),
 });
 
 const bgList = [
@@ -51,7 +50,7 @@ const bgList = [
   "#f97316",
   "#f1f5f9",
 ];
-function getBGcolor(role: string) {
+function getBGcolor(role) {
   if (role === "Admin") {
     return bgList[0];
   } else if (role === "Digital Artist") {
@@ -68,7 +67,7 @@ function getBGcolor(role: string) {
     return bgList[6];
   }
 }
-function getRoleID(role: string) {
+function getRoleID(role) {
   if (role === "Admin") {
     return "adm";
   } else if (role === "Digital Artist") {
@@ -85,30 +84,8 @@ function getRoleID(role: string) {
     return "oth";
   }
 }
-async function getData() {
-  const data = await axios.get("http://localhost:3005/team");
-  return data;
-}
-async function postData(memberData) {
-  const data = await axios.post("http://localhost:3005/team", memberData);
-  return data;
-}
 
-export default function AddMemberForm() {
-  const [members, setMembers] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getData();
-        setMembers(res);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+export default function AddMemberForm({ postData }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -118,18 +95,23 @@ export default function AddMemberForm() {
     },
   });
 
-  async function addMember(data: any) {
-    const newData = {
+  async function addMember(data) {
+    const member = {
       email: data.email,
       username: data.username,
-      role: data.role || "Others",
+      role: data.role,
       roleid: getRoleID(data.role),
       bgColor: getBGcolor(data.role),
       status: "",
       statusid: "",
     };
-    const res = await postData(newData);
-    setMembers(res);
+
+    try {
+      console.log(member);
+      await postData(member);
+    } catch (error) {
+      console.error("Error adding member:", error);
+    }
   }
 
   return (
