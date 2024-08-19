@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 import { Plus, SquarePen } from "lucide-react";
 import AddMemberForm from "../form/addMember";
 import ChangeMemberForm from "../form/dataChange";
-export default function UpdateDialog({ postData }) {
+export default function UpdateDialog({ memberid, postData }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -21,12 +21,12 @@ export default function UpdateDialog({ postData }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add Member</DialogTitle>
+          <DialogTitle>Change Data Member</DialogTitle>
           <DialogDescription>
-            Click Add Member after filling the form
+            Click Update Data after filling the form
           </DialogDescription>
         </DialogHeader>
-        <ChangeMemberForm postData={postData} />
+        <ChangeMemberForm memberid={memberid} postData={postData} />
       </DialogContent>
     </Dialog>
   );

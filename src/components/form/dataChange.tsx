@@ -15,7 +15,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import RoleSelection from "../select";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
+async function getData(key) {
+  try {
+    const res = await axios.get(`http://127.0.0.1:3005/team/${key}`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
 const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -77,7 +88,16 @@ function getRoleID(role) {
   }
 }
 
-export default function ChangeMemberForm({ postData }) {
+export default function ChangeMemberForm({ memberid, postData }) {
+  const [currentData, setCurrentData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getData(memberid);
+      setCurrentData(data[0]);
+    }
+    fetchData();
+  }, [memberid]);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,7 +107,7 @@ export default function ChangeMemberForm({ postData }) {
     },
   });
 
-  async function addMember(data) {
+  async function ChangeData(data) {
     const member = {
       email: data.email,
       username: data.username,
@@ -109,7 +129,7 @@ export default function ChangeMemberForm({ postData }) {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(addMember)}
+        onSubmit={form.handleSubmit(ChangeData)}
         className="grid grid-cols-1 gap-4"
       >
         <FormField
@@ -122,6 +142,7 @@ export default function ChangeMemberForm({ postData }) {
                 <FormControl className="col-span-3">
                   <Input
                     {...field}
+                    value={(currentData && currentData.username) || ""}
                     id="username"
                     placeholder="Username"
                     required
@@ -152,7 +173,7 @@ export default function ChangeMemberForm({ postData }) {
           )}
         />
         <Button type="submit" className="mt-4 justify-self-end">
-          Add Member
+          Update Data
         </Button>
       </form>
     </Form>

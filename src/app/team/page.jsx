@@ -183,22 +183,25 @@ export default function Team() {
     loadMembers();
   }
   async function deleteHandler(key) {
-    async function loadMembers() {
-      try {
-        setLoading(true);
-        const data = await deleteData(key);
-        setMembers(data);
-        const deletedOn = online.filter((on,index) => key !== index)
-        console.log(deletedOn)
-        setOnline(deletedOn);
-      } catch (error) {
-        console.log(error)
-        setError(error.message);
-      } finally {
-        setLoading(false);
+    const sure = confirm('Are you sure?')
+    if(sure){
+      async function loadMembers() {
+        try {
+          setLoading(true);
+          const data = await deleteData(key);
+          setMembers(data);
+          const deletedOn = online.filter((on,index) => key !== index)
+          console.log(deletedOn)
+          setOnline(deletedOn);
+        } catch (error) {
+          console.log(error)
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
       }
+      loadMembers();
     }
-    loadMembers();
   }
   async function updateHandler(key) {
     async function loadMembers() {
@@ -224,7 +227,7 @@ export default function Team() {
   return (
     <div className="grid gap-4">
       <header>
-        <h2 className="text-3xl font-[700]">Team Setting</h2>
+        <h2 className="text-2xl font-[700]">Team Setting</h2>
       </header>
       <div className="grid gap-4">
         <div className="flex items-center justify-between gap-4">
@@ -266,7 +269,7 @@ export default function Team() {
                 )}
               </div>
               <div className="flex lg:w-1/6 w-full justify-end items-center">
-                <UpdateDialog postData={updateHandler}/>
+                <UpdateDialog memberid={member.id} postData={updateHandler}/>
                 <Button variant={"ghost"} className="p-1" onClick={() => deleteHandler(member.id)}>
                   <Trash2 />
                 </Button>
