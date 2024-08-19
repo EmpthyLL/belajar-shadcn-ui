@@ -8,7 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import axios from "axios";
 import SearchInput from "@/components/search";
-import DialogForm from "@/components/dialog";
+import AddDialog from "@/components/dialog/addMember";
+import UpdateDialog from "@/components/dialog/dataChange";
 
 async function getData() {
   try {
@@ -22,6 +23,24 @@ async function getData() {
 async function postData(memberData) {
   try {
     const res = await axios.post("http://127.0.0.1:3005/team", memberData);
+    return res.data.members;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
+async function deleteData(key) {
+  try {
+    const res = await axios.delete(`http://127.0.0.1:3005/team/${key}`);
+    return res.data.members;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
+async function updateData(key, changes) {
+  try {
+    const res = await axios.put(`http://127.0.0.1:3005/team/${key}`, changes);
     return res.data.members;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -154,9 +173,45 @@ export default function Team() {
         const data = await postData(member);
         setMembers(data);
         const newOn = Math.round(Math.random());
-        setOnline(...online, newOn);
+        setOnline([...online, newOn]);
       } catch (error) {
-        setError("Failed to send data member");
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadMembers();
+  }
+  async function deleteHandler(key) {
+    async function loadMembers() {
+      try {
+        setLoading(true);
+        const data = await deleteData(key);
+        setMembers(data);
+        const deletedOn = online.filter((on,index) => key !== index)
+        console.log(deletedOn)
+        setOnline(deletedOn);
+      } catch (error) {
+        console.log(error)
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadMembers();
+  }
+  async function updateHandler(key) {
+    async function loadMembers() {
+      try {
+        setLoading(true);
+        const data = await updateData(key);
+        setMembers(data);
+        const deletedOn = online.filter((on,index) => key !== index)
+        console.log(deletedOn)
+        setOnline(deletedOn);
+      } catch (error) {
+        console.log(error)
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -174,7 +229,7 @@ export default function Team() {
       <div className="grid gap-4">
         <div className="flex items-center justify-between gap-4">
           <SearchInput type="text" placeholder="Search a team member..." />
-          <DialogForm postData={sendData} />
+          <AddDialog postData={sendData} />
         </div>
       </div>
       <div className="border rounded-md">
@@ -189,10 +244,10 @@ export default function Team() {
         ) : (
           members.map((member, key) => (
             <div
-              className="grid grid-cols-6 pr-4 items-center justify-between border-b last:border-0"
+              className="flex w-full pr-4 items-center justify-between border-b last:border-0"
               key={key}
             >
-              <div className="lg:col-span-2 col-span-5">
+              <div className="flex-grow lg:w-1/3 w-5/6">
                 <UserItem
                   name={member.username}
                   description={member.email}
@@ -202,7 +257,7 @@ export default function Team() {
                   online={online[key]}
                 />
               </div>
-              <div className="col-span-3 lg:flex hidden gap-5">
+              <div className="flex w-full gap-5 items-center">
                 <Badge className={`tag ${member.roleid}`}>{member.role}</Badge>
                 {member.status && (
                   <Badge className={`tag ${member.statusid}`}>
@@ -210,8 +265,9 @@ export default function Team() {
                   </Badge>
                 )}
               </div>
-              <div className="col-span-1 md:flex hidden justify-end">
-                <Button variant={"ghost"}>
+              <div className="flex lg:w-1/6 w-full justify-end items-center">
+                <UpdateDialog postData={updateHandler}/>
+                <Button variant={"ghost"} className="p-1" onClick={() => deleteHandler(member.id)}>
                   <Trash2 />
                 </Button>
               </div>

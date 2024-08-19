@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
-import AddMemberForm from "../form";
-export default function DialogForm({ postData }) {
+import AddMemberForm from "../form/addMember";
+export default function AddDialog({ postData }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
