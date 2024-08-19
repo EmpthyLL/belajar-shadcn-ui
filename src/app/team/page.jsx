@@ -33,6 +33,7 @@ export default function Team() {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [online, setOnline] = useState();
   // const bgList = [
   //   "#eab308",
   //   "#10b981",
@@ -133,6 +134,10 @@ export default function Team() {
         const data = await getData();
         console.log(data);
         setMembers(data);
+        const array = [...Array(data.length)].map((arr) =>
+          Math.round(Math.random())
+        );
+        setOnline(array);
       } catch (error) {
         setError("Failed to fetch members");
       } finally {
@@ -148,6 +153,8 @@ export default function Team() {
         setLoading(true);
         const data = await postData(member);
         setMembers(data);
+        const newOn = Math.round(Math.random());
+        setOnline(...online, newOn);
       } catch (error) {
         setError("Failed to send data member");
       } finally {
@@ -159,7 +166,6 @@ export default function Team() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-
   return (
     <div className="grid gap-4">
       <header>
@@ -193,7 +199,7 @@ export default function Team() {
                   shadow={false}
                   border={false}
                   backgroundColor={member.bgcolor}
-                  online={member.online}
+                  online={online[key]}
                 />
               </div>
               <div className="col-span-3 lg:flex hidden gap-5">
