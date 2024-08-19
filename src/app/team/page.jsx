@@ -38,9 +38,12 @@ async function deleteData(key) {
     return [];
   }
 }
-async function updateData(key, changes) {
+async function updateData(changes) {
   try {
-    const res = await axios.put(`http://127.0.0.1:3005/team/${key}`, changes);
+    const res = await axios.put(
+      `http://127.0.0.1:3005/team/${changes.id}`,
+      changes
+    );
     return res.data.members;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -151,7 +154,6 @@ export default function Team() {
     async function loadMembers() {
       try {
         const data = await getData();
-        console.log(data);
         setMembers(data);
         const array = [...Array(data.length)].map((arr) =>
           Math.round(Math.random())
@@ -183,18 +185,18 @@ export default function Team() {
     loadMembers();
   }
   async function deleteHandler(key) {
-    const sure = confirm('Are you sure?')
-    if(sure){
+    const sure = confirm("Are you sure?");
+    if (sure) {
       async function loadMembers() {
         try {
           setLoading(true);
           const data = await deleteData(key);
           setMembers(data);
-          const deletedOn = online.filter((on,index) => key !== index)
-          console.log(deletedOn)
+          const deletedOn = online.filter((on, index) => key !== index);
+          console.log(deletedOn);
           setOnline(deletedOn);
         } catch (error) {
-          console.log(error)
+          console.log(error);
           setError(error.message);
         } finally {
           setLoading(false);
@@ -203,17 +205,14 @@ export default function Team() {
       loadMembers();
     }
   }
-  async function updateHandler(key) {
+  async function updateHandler(update) {
     async function loadMembers() {
       try {
         setLoading(true);
-        const data = await updateData(key);
+        const data = await updateData(update);
         setMembers(data);
-        const deletedOn = online.filter((on,index) => key !== index)
-        console.log(deletedOn)
-        setOnline(deletedOn);
       } catch (error) {
-        console.log(error)
+        console.log(error);
         setError(error.message);
       } finally {
         setLoading(false);
@@ -269,8 +268,12 @@ export default function Team() {
                 )}
               </div>
               <div className="flex lg:w-1/6 w-full justify-end items-center">
-                <UpdateDialog memberid={member.id} postData={updateHandler}/>
-                <Button variant={"ghost"} className="p-1" onClick={() => deleteHandler(member.id)}>
+                <UpdateDialog memberid={member.id} postData={updateHandler} />
+                <Button
+                  variant={"ghost"}
+                  className="p-1"
+                  onClick={() => deleteHandler(member.id)}
+                >
                   <Trash2 />
                 </Button>
               </div>

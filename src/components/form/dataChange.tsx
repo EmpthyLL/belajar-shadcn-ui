@@ -90,11 +90,16 @@ function getRoleID(role) {
 
 export default function ChangeMemberForm({ memberid, postData }) {
   const [currentData, setCurrentData] = useState(null);
+  const [same, setSame] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       const data = await getData(memberid);
       setCurrentData(data[0]);
+      if (data[0]) {
+        form.setValue("username", data[0].username);
+        form.setValue("role", data[0].role);
+      }
     }
     fetchData();
   }, [memberid]);
@@ -108,21 +113,29 @@ export default function ChangeMemberForm({ memberid, postData }) {
   });
 
   async function ChangeData(data) {
-    const member = {
-      email: data.email,
-      username: data.username,
-      role: data.role,
-      roleid: getRoleID(data.role),
-      bgColor: getBGcolor(data.role),
-      status: "",
-      statusid: "",
-    };
-
-    try {
-      console.log(member);
-      await postData(member);
-    } catch (error) {
-      console.error("Error adding member:", error);
+    const changes =
+      currentData.username !== data.username || currentData.role !== data.role;
+    if (changes) {
+      setSame(false);
+      confirm("Are you sure?");
+      let dataSend = {};
+      if (currentData.username !== data.username) {
+        dataSend = { id: memberid, username: data.username };
+      } else {
+        dataSend = {
+          id: memberid,
+          role: data.role,
+          roleid: getRoleID(data.role),
+          bgColor: getBGcolor(data.role),
+        };
+      }
+      try {
+        await postData(dataSend);
+      } catch (error) {
+        console.error("Error adding member:", error);
+      }
+    } else {
+      setSame(true);
     }
   }
 
@@ -142,7 +155,6 @@ export default function ChangeMemberForm({ memberid, postData }) {
                 <FormControl className="col-span-3">
                   <Input
                     {...field}
-                    value={(currentData && currentData.username) || ""}
                     id="username"
                     placeholder="Username"
                     required
@@ -165,13 +177,23 @@ export default function ChangeMemberForm({ memberid, postData }) {
               <div className="grid grid-cols-4 items-center gap-4">
                 <FormLabel>Role</FormLabel>
                 <FormControl className="col-span-3">
-                  <RoleSelection onChange={field.onChange} />
+                  <RoleSelection
+                    memberRole={(currentData && currentData.role) || "Others"}
+                    onChange={field.onChange}
+                  />
                 </FormControl>
               </div>
               <FormMessage className="col-span-4" />
             </FormItem>
           )}
         />
+        {same ? (
+          <div className="text-red-500 text-sm font-medium">
+            There is nothing change!
+          </div>
+        ) : (
+          ""
+        )}
         <Button type="submit" className="mt-4 justify-self-end">
           Update Data
         </Button>

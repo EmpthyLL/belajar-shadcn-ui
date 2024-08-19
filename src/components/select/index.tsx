@@ -20,11 +20,12 @@ const roles = [
 
 export default function RoleSelection({
   onChange,
+  memberRole,
 }: {
   onChange: (value: string) => void;
 }) {
   return (
-    <Select name="role" onValueChange={onChange}>
+    <Select name="role" value={memberRole} onValueChange={onChange}>
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="Select your role" />
       </SelectTrigger>
