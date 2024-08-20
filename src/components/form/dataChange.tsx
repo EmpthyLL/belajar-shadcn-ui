@@ -117,22 +117,24 @@ export default function ChangeMemberForm({ memberid, postData }) {
       currentData.username !== data.username || currentData.role !== data.role;
     if (changes) {
       setSame(false);
-      confirm("Are you sure?");
-      let dataSend = {};
-      if (currentData.username !== data.username) {
-        dataSend = { id: memberid, username: data.username };
-      } else {
-        dataSend = {
-          id: memberid,
-          role: data.role,
-          roleid: getRoleID(data.role),
-          bgColor: getBGcolor(data.role),
-        };
-      }
-      try {
-        await postData(dataSend);
-      } catch (error) {
-        console.error("Error adding member:", error);
+      const sure = confirm("Are you sure?");
+      if (sure) {
+        let dataSend = {};
+        if (currentData.username !== data.username) {
+          dataSend = { id: memberid, username: data.username };
+        } else {
+          dataSend = {
+            id: memberid,
+            role: data.role,
+            roleid: getRoleID(data.role),
+            bgColor: getBGcolor(data.role),
+          };
+        }
+        try {
+          await postData(dataSend);
+        } catch (error) {
+          console.error("Error adding member:", error);
+        }
       }
     } else {
       setSame(true);

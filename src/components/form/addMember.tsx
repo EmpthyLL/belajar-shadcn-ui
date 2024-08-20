@@ -102,8 +102,8 @@ export default function AddMemberForm({ postData }) {
       role: data.role,
       roleid: getRoleID(data.role),
       bgColor: getBGcolor(data.role),
-      status: "",
-      statusid: "",
+      status: "Pending",
+      statusid: "pend",
     };
 
     try {
